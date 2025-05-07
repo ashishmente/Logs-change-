@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Container name or ID
+CONTAINER_NAME="your_container_name"
+
+# Destination directory for logs
+LOG_DIR="/your/specified/path"
+
+# Get yesterday's date and today's date
+YESTERDAY=$(date -d "yesterday" +%F)
+TODAY=$(date +%F)
+
+# Create timestamp range
+SINCE="${YESTERDAY}T00:00:00"
+UNTIL="${TODAY}T00:00:00"
+
+# Run docker logs and store the output
+docker logs --since "$SINCE" --until "$UNTIL" "$CONTAINER_NAME" > "$LOG_DIR/${YESTERDAY}.log" 2>&1
+
+
